@@ -32,24 +32,28 @@ public class ProductBasket {
 
     public void printBasket() {
         boolean sign = false;
+        int specialProduct = 0;
         for (int i = 0; i < this.basket.length; i++) {
             if (this.basket[i] != null) {
                 System.out.println(this.basket[i].toString());
                 sign = true;
+            }
+            if (this.basket[i] != null && this.basket[i].isSpecial()) {
+                specialProduct++;
             }
         }
         if (!sign) {
             System.out.println("В корзине пусто");
         } else {
             System.out.println("Итого: " + this.basketValue());
+            System.out.println("Специальных товаров: " + specialProduct);
         }
     }
 
     public boolean checkingProductInTheCart(Product product) {
         boolean sign = false;
         for (int i = 0; i < this.basket.length; i++) {
-            if (this.basket[i] != null
-                    && this.basket[i].getName() == product.getName()) {
+            if (this.basket[i] != null && this.basket[i].getName() == product.getName()) {
                 sign = true;
                 return sign;
             }

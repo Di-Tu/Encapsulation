@@ -1,30 +1,27 @@
 package org.skypro.skyshop.product;
 
-public class Product {
+public abstract class Product {
     private String name;
-    private int price;
 
-    public Product(String name, int price) {
+
+    public Product(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Ошибка ввода имени");
         }
-        if (price <= 0) {
-            throw new IllegalArgumentException("Ошибка ввода стоимости");
-        }
         this.name = name;
-        this.price = price;
+
     }
 
     public String getName() {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
+    public abstract int getPrice();
+
+    public abstract boolean isSpecial();
 
     @Override
     public String toString() {
-        return name + " :" + price;
+        return name;
     }
 }
