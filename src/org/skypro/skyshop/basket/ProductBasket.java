@@ -45,7 +45,7 @@ public class ProductBasket {
         }
     }
 
-    public boolean CheckingProductInTheCart(Product product) {
+    public boolean checkingProductInTheCart(Product product) {
         boolean sign = false;
         for (int i = 0; i < this.basket.length; i++) {
             if (this.basket[i] != null

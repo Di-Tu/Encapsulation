@@ -55,7 +55,7 @@ public class App {
 
         System.out.println();
         System.out.println("Проверяем наличие сметаны в корзине Ивана: ");
-        if (ivan.CheckingProductInTheCart(sourCream)) {
+        if (ivan.checkingProductInTheCart(sourCream)) {
             System.out.println("Продукт сметана, присутствует в корзине Ивана");
         } else {
             System.out.println("Продукта сметана, нет в корзине Ивана");
@@ -63,7 +63,7 @@ public class App {
 
         System.out.println();
         System.out.println("Проверяем наличие сметаны в корзине Ирины: ");
-        if (irina.CheckingProductInTheCart(sourCream)) {
+        if (irina.checkingProductInTheCart(sourCream)) {
             System.out.println("Продукт сметана, присутствует в корзине Ирины");
         } else {
             System.out.println("Продукта сметана, нет в корзине Ирины");
@@ -82,7 +82,7 @@ public class App {
 
         System.out.println();
         System.out.println("Проверяем наличие сметаны в корзине Ивана: ");
-        if (ivan.CheckingProductInTheCart(sourCream)) {
+        if (ivan.checkingProductInTheCart(sourCream)) {
             System.out.println("Продукт сметана, присутствует в корзине Ивана");
         } else {
             System.out.println("Продукта сметана, нет в корзине Ивана");
