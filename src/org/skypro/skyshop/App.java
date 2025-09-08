@@ -1,10 +1,15 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.SimpleProduct;
+import org.skypro.skyshop.search.SearchEngine;
+import org.skypro.skyshop.search.Searchable;
+
+import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -110,5 +115,44 @@ public class App {
         System.out.println("Печатаем содержимое корзины Ивана");
         ivan.printBasket();
 
+//        Домашка №3 (Полиморфизм, интерфейсы)
+        System.out.println();
+
+        SearchEngine searchEngine = new SearchEngine(17);
+        searchEngine.add(orange);
+        searchEngine.add(apple);
+        searchEngine.add(bread);
+        searchEngine.add(sourCream);
+        searchEngine.add(sugar);
+        searchEngine.add(mango);
+        searchEngine.add(salt);
+        searchEngine.add(milk);
+        searchEngine.add(saltShaker);
+        searchEngine.add(soap);
+
+        Product bread1 = new SimpleProduct("Хлеб1", 51);
+        Product bread2 = new SimpleProduct("Хлеб2", 52);
+        Product bread3 = new SimpleProduct("Хлеб3", 53);
+
+        searchEngine.add(bread1);
+        searchEngine.add(bread2);
+        searchEngine.add(bread3);
+
+        Searchable first = new Article("Первый", "Первый он и есть первый");
+        Searchable second = new Article("Второй", "Второй он и есть второй");
+        Searchable breadHead = new Article("ХлебГолова", "Хлеб всему голова");
+        Searchable breadHead1 = new Article("ХлебГолова1", "Хлеб и Соль всему  голова");
+
+        searchEngine.add(first);
+        searchEngine.add(second);
+        searchEngine.add(breadHead);
+        searchEngine.add(breadHead1);
+
+        System.out.println(Arrays.toString(searchEngine.search("Лимон")));
+        System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
+        System.out.println(Arrays.toString(searchEngine.search("Соль Первый СахарМанго")));
+        System.out.println(Arrays.toString(searchEngine.search("Соль")));
+        System.out.println(Arrays.toString(searchEngine.search("всему")));
+        System.out.println(Arrays.toString(searchEngine.search("Молоко")));
     }
 }
