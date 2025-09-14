@@ -1,6 +1,8 @@
 package org.skypro.skyshop.product;
 
-public abstract class Product {
+import org.skypro.skyshop.search.Searchable;
+
+public abstract class Product implements Searchable {
     private String name;
 
 
@@ -9,7 +11,21 @@ public abstract class Product {
             throw new IllegalArgumentException("Ошибка ввода имени");
         }
         this.name = name;
+    }
 
+    @Override
+    public String searchTerm() {
+        return name;
+    }
+
+    @Override
+    public String contentType() {
+        return "PRODUCT";
+    }
+
+    @Override
+    public String objectName() {
+        return getStringRepresentation();
     }
 
     public String getName() {
