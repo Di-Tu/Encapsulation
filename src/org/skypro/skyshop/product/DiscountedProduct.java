@@ -7,8 +7,18 @@ public class DiscountedProduct extends Product {
 
     public DiscountedProduct(String name, int price, int discountInWholePercentages) {
         super(name);
-        this.price = price;
-        this.discountInWholePercentages = discountInWholePercentages;
+        try {
+            if (price <= 0) {
+                throw new IllegalArgumentException("Ошибка ввода стоимости");
+            }
+            if (discountInWholePercentages < 0 || discountInWholePercentages > 100) {
+                throw new IllegalArgumentException("Ошибка ввода процента скидки");
+            }
+            this.price = price;
+            this.discountInWholePercentages = discountInWholePercentages;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 
     @Override
@@ -25,6 +35,4 @@ public class DiscountedProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
-
-
 }

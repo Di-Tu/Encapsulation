@@ -11,6 +11,8 @@ import org.skypro.skyshop.search.Searchable;
 
 import java.util.Arrays;
 
+import org.skypro.skyshop.exceptions.BestResultNotFound;
+
 public class App {
     public static void main(String[] args) {
 
@@ -25,6 +27,16 @@ public class App {
         Product milk = new DiscountedProduct("Молоко", 90, 15);
         Product saltShaker = new FixPriceProduct("Солонка");
         Product soap = new FixPriceProduct("Мыло");
+
+        Product bread1 = new SimpleProduct("Хлеб1", 51);
+        Product bread2 = new SimpleProduct("Хлеб2", 52);
+        Product bread3 = new SimpleProduct("Хлеб3", 53);
+//        Article
+        Searchable first = new Article("Первый", "Первый он и есть первый");
+        Searchable second = new Article("Второй", "Второй он и есть второй");
+        Searchable breadHead = new Article("ХлебГолова", "Хлеб всему голова");
+        Searchable breadHead1 = new Article("ХлебГолова1", "Хлеб и Соль всему  голова и еще голова");
+
 
         ProductBasket ivan = new ProductBasket();
         ProductBasket irina = new ProductBasket();
@@ -129,30 +141,49 @@ public class App {
         searchEngine.add(milk);
         searchEngine.add(saltShaker);
         searchEngine.add(soap);
-
-        Product bread1 = new SimpleProduct("Хлеб1", 51);
-        Product bread2 = new SimpleProduct("Хлеб2", 52);
-        Product bread3 = new SimpleProduct("Хлеб3", 53);
-
         searchEngine.add(bread1);
         searchEngine.add(bread2);
         searchEngine.add(bread3);
-
-        Searchable first = new Article("Первый", "Первый он и есть первый");
-        Searchable second = new Article("Второй", "Второй он и есть второй");
-        Searchable breadHead = new Article("ХлебГолова", "Хлеб всему голова");
-        Searchable breadHead1 = new Article("ХлебГолова1", "Хлеб и Соль всему  голова");
-
+//        Article
         searchEngine.add(first);
         searchEngine.add(second);
         searchEngine.add(breadHead);
         searchEngine.add(breadHead1);
-
+//        Поиск и вывод
         System.out.println(Arrays.toString(searchEngine.search("Лимон")));
         System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
         System.out.println(Arrays.toString(searchEngine.search("Соль Первый СахарМанго")));
         System.out.println(Arrays.toString(searchEngine.search("Соль")));
         System.out.println(Arrays.toString(searchEngine.search("всему")));
         System.out.println(Arrays.toString(searchEngine.search("Молоко")));
+
+//        Домашка №4
+        System.out.println();
+        System.out.println("Домашка №4");
+        System.out.println("Создаём продукт mango1 с пустым названием:");
+        Product mango1 = new SimpleProduct(null, 50);
+        System.out.println("Создаём продукт milk1 с ценой 0");
+        Product milk1 = new DiscountedProduct("Молоко", 0, 15);
+        System.out.println("Создаём продукт milk2 со скидкой 102%");
+        Product milk2 = new DiscountedProduct("Молоко", 115, 102);
+//       Ищем самый подходящий элемент
+        System.out.println();
+        System.out.println("Ищем самый подходящий элемент");
+        try {
+            System.out.println(searchEngine.mostSuitableToTheDesired("голова"));
+        } catch (BestResultNotFound e) {
+            System.out.println("Строка с вхождением: " + e.getMessage() + " не найдена");
+        }
+//        Должно выпасть исключение
+        try {
+            System.out.println(searchEngine.mostSuitableToTheDesired("Краб"));
+        } catch (BestResultNotFound e) {
+            System.out.println("Строка с вхождением: \"" + e.getMessage() + "\" не найдена");
+        }
+        try {
+            System.out.println(searchEngine.mostSuitableToTheDesired("Молоко"));
+        } catch (BestResultNotFound e) {
+            System.out.println("Строка с вхождением: \"" + e.getMessage() + "\" не найдена");
+        }
     }
 }
