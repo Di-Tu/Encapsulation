@@ -16,7 +16,6 @@ public class SearchEngine {
         for (Searchable element : this.searchable) {
             if (element.objectName().contains(query)) {
                 result[counter] = element;
-//                        .objectName();
                 counter++;
             }
             if (counter == 5) {
