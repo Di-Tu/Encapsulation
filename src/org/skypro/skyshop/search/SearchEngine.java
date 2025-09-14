@@ -10,12 +10,13 @@ public class SearchEngine {
         this.searchable = new Searchable[size];
     }
 
-    public String[] search(String query) {
-        String[] result = new String[5];
+    public Searchable[] search(String query) {
+        Searchable[] result = new Searchable[5];
         int counter = 0;
         for (Searchable element : this.searchable) {
             if (element.objectName().contains(query)) {
-                result[counter] = element.objectName();
+                result[counter] = element;
+//                        .objectName();
                 counter++;
             }
             if (counter == 5) {
