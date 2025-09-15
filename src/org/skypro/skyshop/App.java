@@ -170,20 +170,17 @@ public class App {
         System.out.println();
         System.out.println("Ищем самый подходящий элемент");
         try {
-            System.out.println(searchEngine.mostSuitableToTheDesired("голова"));
+            Searchable search = searchEngine.mostSuitableToTheDesired("Голова");
+            System.out.println(search);
         } catch (BestResultNotFound e) {
             System.out.println("Строка с вхождением: " + e.getMessage() + " не найдена");
         }
 //        Должно выпасть исключение
         try {
-            System.out.println(searchEngine.mostSuitableToTheDesired("Краб"));
+            Searchable search = searchEngine.mostSuitableToTheDesired("Краб");
+            System.out.println(search);
         } catch (BestResultNotFound e) {
-            System.out.println("Строка с вхождением: \"" + e.getMessage() + "\" не найдена");
-        }
-        try {
-            System.out.println(searchEngine.mostSuitableToTheDesired("Молоко"));
-        } catch (BestResultNotFound e) {
-            System.out.println("Строка с вхождением: \"" + e.getMessage() + "\" не найдена");
+            System.out.println("Строка с вхождением: " + e.getMessage() + " не найдена");
         }
     }
 }
