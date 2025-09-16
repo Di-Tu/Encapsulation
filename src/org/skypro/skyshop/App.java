@@ -161,11 +161,23 @@ public class App {
         System.out.println();
         System.out.println("Домашка №4");
         System.out.println("Создаём продукт mango1 с пустым названием:");
-        Product mango1 = new SimpleProduct(null, 50);
+        try {
+            Product mango1 = new SimpleProduct(null, 50);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
         System.out.println("Создаём продукт milk1 с ценой 0");
-        Product milk1 = new DiscountedProduct("Молоко", 0, 15);
+        try {
+            Product milk1 = new DiscountedProduct("Молоко", 0, 15);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
         System.out.println("Создаём продукт milk2 со скидкой 102%");
-        Product milk2 = new DiscountedProduct("Молоко", 115, 102);
+        try {
+            Product milk2 = new DiscountedProduct("Молоко", 115, 102);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
 //       Ищем самый подходящий элемент
         System.out.println();
         System.out.println("Ищем самый подходящий элемент");

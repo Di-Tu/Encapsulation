@@ -7,14 +7,10 @@ public abstract class Product implements Searchable {
 
 
     public Product(String name) {
-        try {
-            if (name == null || name.isBlank()) {
-                throw new IllegalArgumentException();
-            }
-            this.name = name;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка ввода имени");
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Ошибка ввода имени");
         }
+        this.name = name;
     }
 
     @Override
