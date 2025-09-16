@@ -7,6 +7,12 @@ public class DiscountedProduct extends Product {
 
     public DiscountedProduct(String name, int price, int discountInWholePercentages) {
         super(name);
+        if (price <= 0) {
+            throw new IllegalArgumentException("Ошибка ввода стоимости");
+        }
+        if (discountInWholePercentages < 0 || discountInWholePercentages > 100) {
+            throw new IllegalArgumentException("Ошибка ввода процента скидки");
+        }
         this.price = price;
         this.discountInWholePercentages = discountInWholePercentages;
     }
@@ -25,6 +31,4 @@ public class DiscountedProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
-
-
 }
