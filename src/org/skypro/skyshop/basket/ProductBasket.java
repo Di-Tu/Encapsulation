@@ -3,28 +3,23 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductBasket {
 
-    private Product[] basket = new Product[5];
+    private List<Product> basket = new LinkedList<>();
 
     public void addingProductToCart(Product product) {
-        for (int i = 0; i <= this.basket.length; i++) {
-            if (i == this.basket.length) {
-                System.out.println("Невозможно добавить продукт " + product.toString());
-                break;
-            } else if (this.basket[i] == null) {
-                this.basket[i] = product;
-                break;
-            }
-        }
+        this.basket.add(product);
     }
 
     public int basketValue() {
         int summ = 0;
-        for (int i = 0; i < this.basket.length; i++) {
-            if (this.basket[i] != null) {
-                summ = summ + this.basket[i].getPrice();
+        for (Product element : this.basket) {
+            if (element != null) {
+                summ = summ + element.getPrice();
             }
         }
         return summ;
@@ -33,12 +28,12 @@ public class ProductBasket {
     public void printBasket() {
         boolean sign = false;
         int specialProduct = 0;
-        for (int i = 0; i < this.basket.length; i++) {
-            if (this.basket[i] != null) {
-                System.out.println(this.basket[i].toString());
+        for (Product element : this.basket) {
+            if (element != null) {
+                System.out.println(element.toString());
                 sign = true;
             }
-            if (this.basket[i] != null && this.basket[i].isSpecial()) {
+            if (element != null && element.isSpecial()) {
                 specialProduct++;
             }
         }
@@ -52,8 +47,8 @@ public class ProductBasket {
 
     public boolean checkingProductInTheCart(Product product) {
         boolean sign = false;
-        for (int i = 0; i < this.basket.length; i++) {
-            if (this.basket[i] != null && this.basket[i].getName() == product.getName()) {
+        for (Product element : this.basket) {
+            if (element != null && element.getName() == product.getName()) {
                 sign = true;
                 return sign;
             }
@@ -62,8 +57,20 @@ public class ProductBasket {
     }
 
     public void clearingBasket() {
-        Arrays.fill(this.basket, null);
+        basket.clear();
     }
 
+    public List removingAnItemFromTheBasket(String name) {
+        Iterator<Product> iterator = basket.iterator();
+        List<Product> deleteProduct = new LinkedList<>();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getName().equals(name)) {
+                deleteProduct.add(product);
+                iterator.remove();
+            }
+        }
+        return deleteProduct;
+    }
 }
 
