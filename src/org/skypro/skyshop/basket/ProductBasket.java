@@ -60,7 +60,7 @@ public class ProductBasket {
         basket.clear();
     }
 
-    public List removingAnItemFromTheBasket(String name) {
+    public List<Product> removingAnItemFromTheBasket(String name) {
         Iterator<Product> iterator = basket.iterator();
         List<Product> deleteProduct = new LinkedList<>();
         while (iterator.hasNext()) {

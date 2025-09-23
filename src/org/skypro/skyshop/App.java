@@ -9,8 +9,6 @@ import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
@@ -81,11 +79,11 @@ public class App {
         System.out.println("Стоимость корзины Артема: " + artem.basketValue());
 
         System.out.println();
-        System.out.println("Проверяем наличие сметаны в корзине Ивана: ");
-        if (ivan.checkingProductInTheCart(sourCream)) {
-            System.out.println("Продукт сметана, присутствует в корзине Ивана");
+        System.out.println("Проверяем наличие манго в корзине Ивана: ");
+        if (ivan.checkingProductInTheCart(mango)) {
+            System.out.println("Продукт манго, присутствует в корзине Ивана");
         } else {
-            System.out.println("Продукта сметана, нет в корзине Ивана");
+            System.out.println("Продукта манго, нет в корзине Ивана");
         }
 
         System.out.println();
@@ -217,7 +215,7 @@ public class App {
         System.out.println();
         System.out.println("Удаляем из корзины продукт: Хлеб и выводим список удаленного");
 //        1.
-        List delProd = ivan.removingAnItemFromTheBasket("Хлеб");
+        List<Product> delProd = ivan.removingAnItemFromTheBasket("Хлеб");
 //        2.
         System.out.println(delProd);
         System.out.println();

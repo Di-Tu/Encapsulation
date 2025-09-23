@@ -1,12 +1,9 @@
 package org.skypro.skyshop.search;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
-import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
