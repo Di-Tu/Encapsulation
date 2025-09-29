@@ -9,7 +9,7 @@ import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.search.SearchEngine;
 import org.skypro.skyshop.search.Searchable;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
@@ -79,11 +79,11 @@ public class App {
         System.out.println("Стоимость корзины Артема: " + artem.basketValue());
 
         System.out.println();
-        System.out.println("Проверяем наличие сметаны в корзине Ивана: ");
-        if (ivan.checkingProductInTheCart(sourCream)) {
-            System.out.println("Продукт сметана, присутствует в корзине Ивана");
+        System.out.println("Проверяем наличие манго в корзине Ивана: ");
+        if (ivan.checkingProductInTheCart(mango)) {
+            System.out.println("Продукт манго, присутствует в корзине Ивана");
         } else {
-            System.out.println("Продукта сметана, нет в корзине Ивана");
+            System.out.println("Продукта манго, нет в корзине Ивана");
         }
 
         System.out.println();
@@ -115,7 +115,7 @@ public class App {
 
         // Домашка №2
         System.out.println();
-        System.out.println("Заполняем корзину Ивана, очищенную ранее. Для проверки добавляем лишний продукт.");
+        System.out.println("Заполняем корзину Ивана, очищенную ранее.");
         ivan.addingProductToCart(bread);
         ivan.addingProductToCart(salt);
         ivan.addingProductToCart(milk);
@@ -130,7 +130,7 @@ public class App {
 //        Домашка №3 (Полиморфизм, интерфейсы)
         System.out.println();
 
-        SearchEngine searchEngine = new SearchEngine(17);
+        SearchEngine searchEngine = new SearchEngine();
         searchEngine.add(orange);
         searchEngine.add(apple);
         searchEngine.add(bread);
@@ -150,12 +150,18 @@ public class App {
         searchEngine.add(breadHead);
         searchEngine.add(breadHead1);
 //        Поиск и вывод
-        System.out.println(Arrays.toString(searchEngine.search("Лимон")));
-        System.out.println(Arrays.toString(searchEngine.search("Хлеб")));
-        System.out.println(Arrays.toString(searchEngine.search("Соль Первый СахарМанго")));
-        System.out.println(Arrays.toString(searchEngine.search("Соль")));
-        System.out.println(Arrays.toString(searchEngine.search("всему")));
-        System.out.println(Arrays.toString(searchEngine.search("Молоко")));
+        System.out.println("Ищем: Лимон");
+        System.out.println(searchEngine.search("Лимон"));
+        System.out.println("Ищем: Хлеб");
+        System.out.println(searchEngine.search("Хлеб"));
+        System.out.println("Ищем: Соль Первый СахарМанго");
+        System.out.println(searchEngine.search("Соль Первый СахарМанго"));
+        System.out.println("Ищем: Соль");
+        System.out.println(searchEngine.search("Соль"));
+        System.out.println("Ищем: Всему");
+        System.out.println(searchEngine.search("всему"));
+        System.out.println("Ищем: Молоко");
+        System.out.println(searchEngine.search("Молоко"));
 
 //        Домашка №4
         System.out.println();
@@ -192,5 +198,41 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println("Строка с вхождением: \"" + e.getMessage() + "\" не найдена");
         }
+
+//        Домашка №5 Collections
+        System.out.println();
+        System.out.println("Домашка №5 Collections");
+//        Добавим еще несколько продуктов в корзину к Ивану и выведем.
+        ivan.addingProductToCart(bread);
+        ivan.addingProductToCart(sugar);
+        ivan.addingProductToCart(mango);
+        ivan.addingProductToCart(bread2);
+        ivan.addingProductToCart(apple);
+        ivan.addingProductToCart(sourCream);
+        System.out.println("Добавили продукты в корзину Ивана, для удобства демонстрации");
+        System.out.println("Корзина Ивана:");
+        ivan.printBasket();
+        System.out.println();
+        System.out.println("Удаляем из корзины продукт: Хлеб и выводим список удаленного");
+//        1.
+        List<Product> delProd = ivan.removingAnItemFromTheBasket("Хлеб");
+//        2.
+        System.out.println(delProd);
+        System.out.println();
+//        3.
+        System.out.println("Корзина Ивана после удаления продукта:");
+        ivan.printBasket();
+//        4.
+        System.out.println();
+        System.out.println("Удаляем из корзины отсутствующий продукт: Хлеб");
+        delProd = ivan.removingAnItemFromTheBasket("Хлеб");
+//        5.
+        if (delProd.isEmpty()) {
+            System.out.println("Список пуст");
+        }
+//        6.
+        System.out.println();
+        System.out.println("Корзина Ивана:");
+        ivan.printBasket();
     }
 }
