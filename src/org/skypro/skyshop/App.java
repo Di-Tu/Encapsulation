@@ -150,18 +150,19 @@ public class App {
         searchEngine.add(breadHead);
         searchEngine.add(breadHead1);
 //        Поиск и вывод
+//        Домашка по Map, добавил метод вывода prinMap, для удобочитаемости
         System.out.println("Ищем: Лимон");
-        System.out.println(searchEngine.search("Лимон"));
+        searchEngine.printMap(searchEngine.search("Лимон"));
         System.out.println("Ищем: Хлеб");
-        System.out.println(searchEngine.search("Хлеб"));
+        searchEngine.printMap(searchEngine.search("Хлеб"));
         System.out.println("Ищем: Соль Первый СахарМанго");
-        System.out.println(searchEngine.search("Соль Первый СахарМанго"));
+        searchEngine.printMap(searchEngine.search("Соль Первый СахарМанго"));
         System.out.println("Ищем: Соль");
-        System.out.println(searchEngine.search("Соль"));
+        searchEngine.printMap(searchEngine.search("Соль"));
         System.out.println("Ищем: Всему");
-        System.out.println(searchEngine.search("всему"));
+        searchEngine.printMap(searchEngine.search("Всему"));
         System.out.println("Ищем: Молоко");
-        System.out.println(searchEngine.search("Молоко"));
+        searchEngine.printMap(searchEngine.search("Молоко"));
 
 //        Домашка №4
         System.out.println();
