@@ -3,7 +3,6 @@ package org.skypro.skyshop.search;
 import java.util.*;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
-import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 

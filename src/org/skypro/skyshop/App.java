@@ -150,7 +150,7 @@ public class App {
         searchEngine.add(breadHead);
         searchEngine.add(breadHead1);
 //        Поиск и вывод
-//        Домашка по Map, добавил метод вывода prinMap, для удобочитаемости
+//        Домашка по Map, добавил метод вывода printMap, для удобочитаемости
         System.out.println("Ищем: Лимон");
         searchEngine.printMap(searchEngine.search("Лимон"));
         System.out.println("Ищем: Хлеб");

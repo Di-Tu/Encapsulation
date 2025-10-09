@@ -49,17 +49,7 @@ public class ProductBasket {
     }
 
     public boolean checkingProductInTheCart(Product product) {
-        boolean sign = false;
-        for (Map.Entry<String, LinkedList<Product>> entry : this.basket.entrySet()) {
-            LinkedList<Product> products = entry.getValue();
-            for (Product prod : products) {
-                if (prod != null && prod.getName() == product.getName()) {
-                    sign = true;
-                    return sign;
-                }
-            }
-        }
-        return sign;
+        return basket.containsKey(product.getName());
     }
 
     public void clearingBasket() {
