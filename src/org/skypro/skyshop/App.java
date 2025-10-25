@@ -235,5 +235,32 @@ public class App {
         System.out.println();
         System.out.println("Корзина Ивана:");
         ivan.printBasket();
+
+//            Домашка Set
+//    Добавим еще немного продуктов и статей
+        Product bread5 = new SimpleProduct("Хлеб5", 83);
+        Product bread4 = new SimpleProduct("Хлеб9", 73);
+//        Добавим несколько повторяющихся позиций
+        Product bread6 = new SimpleProduct("Хлеб6", 76);
+        Product bread7 = new SimpleProduct("Хлеб6", 53);
+        Searchable third = new Article("Хлеб4", "Третий он всегда третий Хлеб");
+        Searchable third1 = new Article("Хлеб4", "Третий Хлеб");
+        Searchable third3 = new Article("Хлеб 4 по 4", "Четвертый по четвертому");
+        Searchable third2 = new Article("Хлеб 4 по 4", "Четвертый хлеб ");
+
+        searchEngine.add(bread5);
+        searchEngine.add(bread4);
+        searchEngine.add(bread6);
+        searchEngine.add(bread7);
+        searchEngine.add(third);
+        searchEngine.add(third1);
+        searchEngine.add(third2);
+        searchEngine.add(third3);
+//      Поиск и вывод
+        System.out.println();
+        System.out.println("Ищем: Хлеб. Проверяем сортировку и уникальность");
+        searchEngine.printMap(searchEngine.search("Хлеб"));
+        System.out.println("Ищем: Лимон, которого нет.");
+        searchEngine.printMap(searchEngine.search("Лимон"));
     }
 }
