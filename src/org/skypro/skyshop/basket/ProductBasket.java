@@ -3,6 +3,7 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ProductBasket {
 
@@ -13,39 +14,30 @@ public class ProductBasket {
     }
 
     public int basketValue() {
-        int summ = 0;
-        for (Map.Entry<String, LinkedList<Product>> entry : this.basket.entrySet()) {
-            LinkedList<Product> products = entry.getValue();
-            for (Product product : products) {
-                if (product != null) {
-                    summ += product.getPrice();
-                }
-            }
-        }
-        return summ;
+        return basket.values().stream()
+                .flatMap(Collection::stream)
+                .mapToInt(Product::getPrice)
+                .sum();
     }
 
     public void printBasket() {
-        boolean sign = false;
-        int specialProduct = 0;
-        for (Map.Entry<String, LinkedList<Product>> entry : this.basket.entrySet()) {
-            LinkedList<Product> products = entry.getValue();
-            for (Product product : products) {
-                if (product != null) {
-                    System.out.println(product.toString());
-                    sign = true;
-                }
-                if (product != null && product.isSpecial()) {
-                    specialProduct++;
-                }
-            }
-        }
-        if (!sign) {
+        if (this.basket == null || this.basket.isEmpty()) {
             System.out.println("В корзине пусто");
-        } else {
-            System.out.println("Итого: " + this.basketValue());
-            System.out.println("Специальных товаров: " + specialProduct);
+            return;
         }
+        this.basket.values().stream()
+                .flatMap(Collection::stream)
+                .forEach(System.out::println);
+        System.out.println("Итого: " + this.basketValue());
+        this.getSpecialCount();
+    }
+
+    public void getSpecialCount() {
+        System.out.println("Специальных товаров: "
+                + this.basket.values().stream()
+                .flatMap(Collection::stream)
+                .filter(Product::isSpecial)
+                .count());
     }
 
     public boolean checkingProductInTheCart(Product product) {
@@ -57,18 +49,15 @@ public class ProductBasket {
     }
 
     public List<Product> removingAnItemFromTheBasket(String name) {
-        List<Product> deleteProduct = new LinkedList<>();
-        for (Map.Entry<String, LinkedList<Product>> entry : this.basket.entrySet()) {
-            LinkedList<Product> products = entry.getValue();
-            Iterator<Product> iterator = products.iterator();
-            while (iterator.hasNext()) {
-                Product product = iterator.next();
-                if (product.getName().equals(name)) {
-                    deleteProduct.add(product);
-                    iterator.remove();
-                }
-            }
-        }
+        List<Product> deleteProduct = this.basket.values().stream()
+                .flatMap(LinkedList::stream)
+                .filter(product -> product.getName().equals(name))
+                .collect(Collectors.toList());
+
+        this.basket.values().forEach(products ->
+                products.removeIf(product -> product.getName().equals(name))
+        );
+
         return deleteProduct;
     }
 }
