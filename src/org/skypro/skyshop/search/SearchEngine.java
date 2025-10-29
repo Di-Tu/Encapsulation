@@ -1,6 +1,7 @@
 package org.skypro.skyshop.search;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.skypro.skyshop.exceptions.BestResultNotFound;
 
@@ -9,27 +10,17 @@ public class SearchEngine {
     private Map<String, HashSet<Searchable>> searchable = new TreeMap<>();
 
     public Set<Searchable> search(String query) {
-        Set<Searchable> result = new TreeSet<>(new Comparator<Searchable>() {
-            @Override
-            public int compare(Searchable o1, Searchable o2) {
-                int length1 = o1.searchTerm().length();
-                int length2 = o2.searchTerm().length();
-                if (length1 == length2) {
-                    return o2.searchTerm().compareTo(o1.searchTerm());
-                }
-                return length2 - length1;
-            }
-        });
-
-        for (Map.Entry<String, HashSet<Searchable>> entry : this.searchable.entrySet()) {
-            HashSet<Searchable> value = entry.getValue();
-            for (Searchable element : value) {
-                if (element.searchTerm().contains(query)) {
-                    result.add(element);
-                }
-            }
-        }
-        return result;
+        return searchable.values().stream()
+                .flatMap(HashSet::stream)
+                .filter(element -> element.searchTerm().contains(query))
+                .collect(Collectors.toCollection(() -> new TreeSet<>((o1, o2) -> {
+                    int length1 = o1.searchTerm().length();
+                    int length2 = o2.searchTerm().length();
+                    if (length1 == length2) {
+                        return o2.searchTerm().compareTo(o1.searchTerm());
+                    }
+                    return length2 - length1;
+                })));
     }
 
     public void add(Searchable object) {
